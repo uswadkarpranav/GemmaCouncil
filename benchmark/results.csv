@@ -1,0 +1,17 @@
+id,category,prompt,trap,single_caught_trap,council_caught_trap,council_consensus,single_latency_s,council_latency_s,winner,council_benefit_expected
+logic_01,Logic & Premise Traps,"If you have 3 apples in a basket and you take away 2, how ma...",Subject confusion: The question asks how many appl...,False,True,100,0.3,0.6,Council (Decisive Advantage),High (Skeptic catches subject trap)
+logic_02,Logic & Premise Traps,A bat and a ball cost $1.10 in total. The bat costs $1.00 mo...,Cognitive shortcut trap: An intuitive quick guess ...,False,True,100,0.3,0.6,Council (Decisive Advantage),High (Expert / Skeptic catches math illusion)
+logic_03,Logic & Premise Traps,"I have 6 eggs. I broke 2, I cooked 2, and I ate 2. How many ...",Action overlap trap: The same 2 eggs that were bro...,False,True,100,0.3,0.6,Council (Decisive Advantage),High (Skeptic identifies sequential identity of the eggs)
+code_01,Code Security & Concurrency,"Review this Python code for a banking transfer:
+
+def transfe...",Race condition / lack of transaction atomicity: Co...,False,True,95,0.3,0.6,Council (Decisive Advantage),High (Skeptic flags race conditions; Expert details ACID locking)
+code_02,Code Security & Concurrency,"Here is a quick function to read user files in Flask:
+
+@app....",Path Traversal vulnerability (Directory traversal ...,False,True,88,0.3,0.6,Council (Decisive Advantage),High (Skeptic instantly flags exploit payload; Expert provides secure_filename)
+code_03,Code Security & Concurrency,Write a binary search algorithm in Python that handles empty...,Off-by-one errors with while low <= high and mid c...,False,True,88,0.3,0.6,Council (Decisive Advantage),Moderate (Expert and Pragmatist keep code clean and verified)
+system_01,System Architecture & Tradeoffs,Should a high-traffic flash sale ticketing system use eventu...,Over-selling hazard: Eventual consistency leads to...,False,True,95,0.3,0.6,Council (Decisive Advantage),High (Skeptic warns against overselling disasters; Expert details leasing architecture)
+system_02,System Architecture & Tradeoffs,Can you wire four 18650 lithium-ion battery cells in paralle...,"Severe thermal runaway hazard: Without a BMS, inte...",False,True,100,0.3,0.6,Council (Decisive Advantage),High (Skeptic & Expert prevent dangerous physical hazards)
+fact_01,Direct Factual Knowledge,What is the boiling point of pure water at standard atmosphe...,Standard factual query with no trick premise....,True,True,88,0.3,0.6,Tie (Both Succeeded),Low (Single model is already 100% sufficient; council is overhead)
+fact_02,Direct Factual Knowledge,Convert 150 kilometers to miles (to two decimal places)....,Deterministic mathematical unit conversion (1 km ≈...,True,True,88,0.3,0.6,Tie (Both Succeeded),Low (Single model handles basic math conversion cleanly)
+fact_03,Direct Factual Knowledge,Who discovered penicillin and in what year?...,Standard historical fact....,True,True,88,0.3,0.6,Tie (Both Succeeded),Low (Single model is fast and accurate; council is redundant)
+multimodal_01,Ambiguous Context & Misleading Visuals,When analyzing a graph where the Y-axis does not start at ze...,Truncated graph axis distortion / deceptive data v...,False,False,88,0.3,0.6,Tie (Both Missed),High (Skeptic identifies visual manipulation; Expert provides correct chart scaling)

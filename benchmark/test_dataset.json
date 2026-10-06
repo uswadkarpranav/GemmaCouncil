@@ -1,0 +1,98 @@
+[
+  {
+    "id": "logic_01",
+    "category": "Logic & Premise Traps",
+    "prompt": "If you have 3 apples in a basket and you take away 2, how many apples do YOU have?",
+    "trap_or_edge_case": "Subject confusion: The question asks how many apples YOU have, not how many remain in the basket. You took 2, so you have 2.",
+    "expected_core_answer": "You have 2 apples.",
+    "council_benefit_expected": "High (Skeptic catches subject trap)"
+  },
+  {
+    "id": "logic_02",
+    "category": "Logic & Premise Traps",
+    "prompt": "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost?",
+    "trap_or_edge_case": "Cognitive shortcut trap: An intuitive quick guess says $0.10, but the ball actually costs $0.05 ($1.05 + $0.05 = $1.10).",
+    "expected_core_answer": "$0.05 (5 cents)",
+    "council_benefit_expected": "High (Expert / Skeptic catches math illusion)"
+  },
+  {
+    "id": "logic_03",
+    "category": "Logic & Premise Traps",
+    "prompt": "I have 6 eggs. I broke 2, I cooked 2, and I ate 2. How many eggs are left?",
+    "trap_or_edge_case": "Action overlap trap: The same 2 eggs that were broken were then cooked, and then eaten. 4 eggs remain intact.",
+    "expected_core_answer": "4 eggs are left.",
+    "council_benefit_expected": "High (Skeptic identifies sequential identity of the eggs)"
+  },
+  {
+    "id": "code_01",
+    "category": "Code Security & Concurrency",
+    "prompt": "Review this Python code for a banking transfer:\n\ndef transfer(acc1, acc2, amount):\n    if acc1.balance >= amount:\n        acc1.balance -= amount\n        acc2.balance += amount\n        return True\n    return False\n\nIs this production ready?",
+    "trap_or_edge_case": "Race condition / lack of transaction atomicity: Concurrent transfers can cause double-spending or negative balances.",
+    "expected_core_answer": "Not production ready. Lacks database ACID transaction / mutex locking, audit logging, and negative amount validation.",
+    "council_benefit_expected": "High (Skeptic flags race conditions; Expert details ACID locking)"
+  },
+  {
+    "id": "code_02",
+    "category": "Code Security & Concurrency",
+    "prompt": "Here is a quick function to read user files in Flask:\n\n@app.route('/view')\ndef view():\n    filename = request.args.get('file')\n    with open(f'user_uploads/{filename}') as f:\n        return f.read()\n\nIs there any issue?",
+    "trap_or_edge_case": "Path Traversal vulnerability (Directory traversal via `../../etc/passwd`).",
+    "expected_core_answer": "Critical Path Traversal (LFI) security vulnerability; requires strict sanitization or secure filename validation.",
+    "council_benefit_expected": "High (Skeptic instantly flags exploit payload; Expert provides secure_filename)"
+  },
+  {
+    "id": "code_03",
+    "category": "Code Security & Concurrency",
+    "prompt": "Write a binary search algorithm in Python that handles empty lists, duplicates, and returns -1 if not found.",
+    "trap_or_edge_case": "Off-by-one errors with while low <= high and mid calculation overflow in other languages.",
+    "expected_core_answer": "Accurate binary search with explicit edge-case boundary checks.",
+    "council_benefit_expected": "Moderate (Expert and Pragmatist keep code clean and verified)"
+  },
+  {
+    "id": "system_01",
+    "category": "System Architecture & Tradeoffs",
+    "prompt": "Should a high-traffic flash sale ticketing system use eventual consistency for ticket reservations to maximize write throughput?",
+    "trap_or_edge_case": "Over-selling hazard: Eventual consistency leads to fatal overselling for zero-inventory goods. Strong consistency or distributed leasing is mandatory.",
+    "expected_core_answer": "No. Flash sales require strong consistency or distributed reservation locks (e.g. Redis Lua / Two-phase commit) to prevent overselling.",
+    "council_benefit_expected": "High (Skeptic warns against overselling disasters; Expert details leasing architecture)"
+  },
+  {
+    "id": "system_02",
+    "category": "System Architecture & Tradeoffs",
+    "prompt": "Can you wire four 18650 lithium-ion battery cells in parallel without a Battery Management System (BMS) as long as they all read 3.7V initially?",
+    "trap_or_edge_case": "Severe thermal runaway hazard: Without a BMS, internal resistance variance causes cross-charging and fire risk.",
+    "expected_core_answer": "Absolutely not. Extreme fire/explosion hazard. A BMS is mandatory for balancing, overcurrent, and thermal cutoff.",
+    "council_benefit_expected": "High (Skeptic & Expert prevent dangerous physical hazards)"
+  },
+  {
+    "id": "fact_01",
+    "category": "Direct Factual Knowledge",
+    "prompt": "What is the boiling point of pure water at standard atmospheric pressure (1 atm) in both Celsius and Fahrenheit?",
+    "trap_or_edge_case": "Standard factual query with no trick premise.",
+    "expected_core_answer": "100°C and 212°F.",
+    "council_benefit_expected": "Low (Single model is already 100% sufficient; council is overhead)"
+  },
+  {
+    "id": "fact_02",
+    "category": "Direct Factual Knowledge",
+    "prompt": "Convert 150 kilometers to miles (to two decimal places).",
+    "trap_or_edge_case": "Deterministic mathematical unit conversion (1 km ≈ 0.621371 miles).",
+    "expected_core_answer": "93.21 miles.",
+    "council_benefit_expected": "Low (Single model handles basic math conversion cleanly)"
+  },
+  {
+    "id": "fact_03",
+    "category": "Direct Factual Knowledge",
+    "prompt": "Who discovered penicillin and in what year?",
+    "trap_or_edge_case": "Standard historical fact.",
+    "expected_core_answer": "Alexander Fleming in 1928.",
+    "council_benefit_expected": "Low (Single model is fast and accurate; council is redundant)"
+  },
+  {
+    "id": "multimodal_01",
+    "category": "Ambiguous Context & Misleading Visuals",
+    "prompt": "When analyzing a graph where the Y-axis does not start at zero and exaggerates a 1% change into a giant visual cliff, how should it be evaluated?",
+    "trap_or_edge_case": "Truncated graph axis distortion / deceptive data visualization.",
+    "expected_core_answer": "Truncated Y-axis creates false visual urgency; must normalize scale and evaluate absolute percentage delta.",
+    "council_benefit_expected": "High (Skeptic identifies visual manipulation; Expert provides correct chart scaling)"
+  }
+]
